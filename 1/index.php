@@ -94,10 +94,14 @@ if (isset($_POST['numero'])){
       <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form>
     <form class="login-form" method="POST">
-      <input type="text" placeholder="Ingrese en numero de la posicion" name="numero"/>
+      <input type="text" placeholder="Ingrese en numero de la posicion" name="numero" autocomplete="off"/>
       <button>Buscar</button>
-      <P class="message"><?php echo $busqueda ?> </P>
-      <?php echo $planeta ?>
+      <P class="message"><?php if (isset($busqueda)){
+        echo $busqueda;
+      }; ?> </P>
+      <?php  if (isset($planeta)){
+        echo $planeta;
+      }; ?>
     </form>
   </div>
 </div>
