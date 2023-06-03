@@ -1,7 +1,7 @@
 <?php
 $form = '<form class="login-form" method="POST">
 <input type="text" placeholder="Ingrese en numero de planetas" name="numero" autocomplete="off"/>
-<button>Buscar</button>
+<button>Generar</button>
 <P class="message"></P>
 </form>';
 
@@ -15,7 +15,7 @@ if (isset($_POST['numero'])){
   }
   $form .= '<form class="login-form" method="POST">
   '.$inputs.'
-  <button>Buscar</button>
+  <button>Generar</button>
   <P class="message"></P>
   </form>';
   
