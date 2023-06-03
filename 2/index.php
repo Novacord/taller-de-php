@@ -1,5 +1,4 @@
 <?php
-
 $form = '<form class="login-form" method="POST">
 <input type="text" placeholder="Ingrese en numero de planetas" name="numero" autocomplete="off"/>
 <button>Buscar</button>
@@ -8,22 +7,32 @@ $form = '<form class="login-form" method="POST">
 
 if (isset($_POST['numero'])){
   $form = '';
+  $inputs = '';
   for ($i = 1; $i <= intval($_POST['numero']); $i++) {
-    $form .= '<form class="login-form" method="POST">
-    <input type="text" placeholder="Ingrese en # de abitantes" name="habitantes" autocomplete="off"/>
-    <P class="message"></P>
-    </form>';
-  } 
+    $inputs .= '
+    <input type="text" placeholder="Ingrese en # de habitantes" name="habitantes[]" autocomplete="off"/>
+    ';
+  }
+  $form .= '<form class="login-form" method="POST">
+  '.$inputs.'
+  <button>Buscar</button>
+  <P class="message"></P>
+  </form>';
+  
 };
 
 if (isset($_POST['habitantes'])){
   $form = '';
-  for ($i = 1; $i <= intval($_POST['habitantes']); $i++) {
+  foreach ($_POST['habitantes'] as $key => $habitante) {
+    if ($habitante == '0'){
+      $habitante = 'Deshabitado';
+    }
+    $posicion = $key + 1;
     $form .= '<div class="login-form">
-    <P class="numeroP"> planeta '.$i.': # de Habitantes: </P>
+    <P class="mesage"> planeta '.$posicion.': # de Habitantes: '.$habitante.'</P>
     </div>';
   }
-  echo $_POST['habitantes'];
+  
 }
 ?>
 
@@ -35,7 +44,7 @@ if (isset($_POST['habitantes'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio #1</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style1.css">
+    <link rel="stylesheet" href="./style2.css">
 </head>
 <body>
 <ul class="sistema">

@@ -651,3 +651,7 @@ li:nth-child(1) {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+.mesage {
+  color: white;
+}
