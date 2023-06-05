@@ -5,35 +5,53 @@ $form = '<form class="login-form" method="POST">
 <P class="message"></P>
 </form>';
 
+
 if (isset($_POST['numero'])){
   $form = '';
   $inputs = '';
+  $numm = intval($_POST['numero']);
   for ($i = 1; $i <= intval($_POST['numero']); $i++) {
     $inputs .= '
-    <input type="text" placeholder="Ingrese en # de habitantes" name="habitantes[]" autocomplete="off"/>
+    <input type="text" placeholder="Nombre del planeta" name="planeta'.$i.'[nombre]" autocomplete="off"/>
+    <select name="planeta'.$i.'[ab]">
+    <option value="true" selected>habitable</option>
+    <option value="false">No habitable</option>
+    </select>
     ';
+
   }
+
+  var_dump(num);
+
   $form .= '<form class="login-form" method="POST">
   '.$inputs.'
   <button>Generar</button>
   <P class="message"></P>
   </form>';
-  
+
 };
 
-if (isset($_POST['habitantes'])){
+
+if (isset($_POST['planeta1'])){
+  $planetasT = array();
+  
+  for ($n = 1; $n <= 10; $n++){
+    if ($_POST["planeta"."$n"]["ab"] == 'true'){
+      array_push($planetasT,$_POST["planeta"."$n"]);
+    } 
+  };
+
   $form = '';
-  foreach ($_POST['habitantes'] as $key => $habitante) {
-    if ($habitante == '0'){
-      $habitante = 'Deshabitado';
-    }
-    $posicion = $key + 1;
+  foreach ($planetasT as $key => $NombreP) {
     $form .= '<div class="login-form">
-    <P class="mesage"> planeta '.$posicion.': # de Habitantes: '.$habitante.'</P>
+    <P class="mesage"> planeta '.$NombreP["nombre"].': puede ser habitado </P>
     </div>';
   }
-  
-}
+
+};
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +60,9 @@ if (isset($_POST['habitantes'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio #2</title>
+    <title>Ejercicio #3</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style2.css">
+    <link rel="stylesheet" href="./style3.css">
 </head>
 <body>
 <ul class="sistema">
