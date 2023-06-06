@@ -21,8 +21,6 @@ if (isset($_POST['numero'])){
 
   }
 
-  var_dump(num);
-
   $form .= '<form class="login-form" method="POST">
   '.$inputs.'
   <button>Generar</button>
@@ -33,12 +31,14 @@ if (isset($_POST['numero'])){
 
 
 if (isset($_POST['planeta1'])){
-  $planetasT = array();
+  $planetasT = [];
   
-  for ($n = 1; $n <= 10; $n++){
-    if ($_POST["planeta"."$n"]["ab"] == 'true'){
-      array_push($planetasT,$_POST["planeta"."$n"]);
-    } 
+  for ($n = 1; $n <= 30; $n++){
+    if (isset($_POST["planeta"."$n"]["ab"])){
+      if ($_POST["planeta"."$n"]["ab"] == 'true'){
+        array_push($planetasT,$_POST["planeta"."$n"]);
+      };
+    };
   };
 
   $form = '';
