@@ -1,6 +1,6 @@
-<?php
+  <?php
 $form = '<form class="login-form" method="POST">
-<input type="text" placeholder="Ingrese en numero de planetas" name="numero" autocomplete="off"/>
+<input type="text" placeholder="Ingrese en numero de naves" name="numero" autocomplete="off"/>
 <button>Generar</button>
 <P class="message"></P>
 </form>';
@@ -12,9 +12,8 @@ if (isset($_POST['numero'])){
   $numm = intval($_POST['numero']);
   for ($i = 1; $i <= intval($_POST['numero']); $i++) {
     $inputs .= '
-    <input type="text" placeholder="Nombre del planeta" name="planeta'.$i.'[nombre]" autocomplete="off"/>
-    <input type="text" placeholder="gravedad del planeta" name="planeta'.$i.'[gravedad]" autocomplete="off"/>
-    </select>
+    <input type="text" placeholder="Nombre de la nave" name="nave'.$i.'[nombre]" autocomplete="off"/>
+    <input type="text" placeholder="masa de la nave" name="nave'.$i.'[masa]" autocomplete="off"/>
     ';
 
   }
@@ -28,39 +27,32 @@ if (isset($_POST['numero'])){
 };
 
 
-if (isset($_POST['planeta1'])){
-  $planetasT = [];
-  
-  for ($n = 1; $n <= 30; $n++) {
-    if (isset($_POST["planeta".$n]["gravedad"])) {
-      $gravedadCadena = $_POST["planeta".$n]["gravedad"];
-      $gravedadArray = explode(",", $gravedadCadena);
-    
-      $gravedadR = array_map(function($val) {
-        $numero = is_numeric($val) ? floatval($val) : 0;
-        $resultado = $numero * 9.8;
-        $numeroFormateado = number_format($resultado, 2);
-        return $numeroFormateado;
-      }, $gravedadArray);
-    
-      $_POST["planeta".$n]["gravedad"] = $gravedadR;
-
-      $planetasT[] = $_POST["planeta".$n];
+if (isset($_POST['nave1'])){
+  $navesT = [];
+  $suma = 0;
+  for ($n = 1; $n <= 30; $n++){
+    if (isset($_POST["nave"."$n"]["masa"])){
+        $naves = $_POST["nave"."$n"];
+        $navesT[] = $naves;
+        $suma += floatval($naves["masa"]);
     }
   }
-
   $form = '';
-  foreach ($planetasT as $key => $NombreP) {
+  $total = $suma;
+  foreach ($navesT as $key => $nave) {
     $form .= '<div class="login-form">
-    <P class="mesage"> planeta '.$NombreP["nombre"][0].' su gravedad real es:'.$NombreP["gravedad"][0].' </P>
+    <P class="mesage"> nave '.$nave["nombre"].': su masa es de:'.$nave["masa"].' </P>
     </div>';
   }
+  $form .= '<div class="login-form">
+  <P class="mesage"> masa total de todas las naves son:'.$total.' </P>
+  </div>';
 
-};
+}
 
 
 
-?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,9 +60,9 @@ if (isset($_POST['planeta1'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio #4</title>
+    <title>Ejercicio #5</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style4.css">
+    <link rel="stylesheet" href="./style5.css">
 </head>
 <body>
 <ul class="sistema">
